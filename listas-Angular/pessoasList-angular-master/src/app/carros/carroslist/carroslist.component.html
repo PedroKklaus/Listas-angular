@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Lista de <b>Carros</b></h2>
+        </div>
+      </div>
+    </div>
+    <td>
+      <button class="btn btn-success" (click)="adicionar(abc)">
+        Adicionar
+      </button>
+    </td>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Idade</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carro of lista">
+          <td>{{ carro.id }}</td>
+          <td>{{ carro.marca }}</td>
+          <td>{{ carro.ano }}</td>
+          <td class="opcoes">
+            <a
+              (click)="editar(abc, carro, indiceSelecionadoParaEdicao)"
+              class="edit"
+              data-toggle="modal"
+              ><i class="material-icons" data-toggle="tooltip" title="Edit"
+                >&#xE254;</i
+              ></a
+            >
+            <a (click)="deletar(carro.id)" class="delete" data-toggle="modal"
+              ><i class="material-icons" data-toggle="tooltip" title="Delete"
+                >&#xE872;</i
+              ></a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #abc let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Cadastrar novo carro</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-carrosdetails
+      [carro]="carroSelecionadaParaEdicao"
+      (retorno)="addOuEditarCarro($event)"
+    ></app-carrosdetails>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<style>
+  table {
+    border: 0.5px solid rgba(0, 0, 0, 0.514);
+  }
+
+  .edit {
+    color: yellow;
+  }
+
+  .delete {
+    color: rgba(255, 0, 0, 0.596);
+  }
+
+  .col-sm-6 {
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    margin-bottom: 20px;
+  }
+</style>
